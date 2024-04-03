@@ -75,3 +75,52 @@ The following figture compares the original data and the smoothed data on a cert
 
 ## Methodology
 ### Overall
+
+### Clustering-Based Passenger Flow Time Series Feature Extraction
+
+#### Passenger Flow Time Series Clustering
+
+The purpose of clustering analysis is to classify data of a previously unknown structure into meaningful groupings. Clustering passenger flow data helps achieve a better understanding of the time series characteristics.
+
+We select clustering algorithm (KMeans vs. Hierarchical Clustering) according to silhouette score.
+
+The following figtures show the silhouette score of two algorithms.
+
+<div align=center>
+<img src="./resources/KMeans.jpg"/>
+</div>
+
+<div align=center>
+<img src="./resources/Hierarchical.jpg"/>
+</div>
+
+So we train a hierarchical clustering model and set `n_clusters=2`.
+
+Then we analyse the date features of two classes. The result is as follows.
+
+| Cluster | Date Feature | Number of Days |
+| ---- | ---- | ---- |
+| 0 | Holiday | 128 |
+| 1 | Workday | 268 |
+
+The following figture shows the curves of two classes.
+
+<div align=center>
+<img src="./resources/Clustering.jpg"/>
+</div>
+
+#### Time Series Feature Extraction based on Box-plot and IQR Method
+
+According to the theory of the paper, we can extract the feature curves of two classes.
+
+The following figtures show the feature curves of two classes.
+
+<div align=center>
+<img src="./resources/Holiday-Feature Curve of the Total Flow.jpg"/>
+</div>
+
+<div align=center>
+<img src="./resources/Workday-Feature Curve of the Total Flow.jpg"/>
+</div>
+
+After then, we can detect the abnormal flow according to the upper and lower bound curves.
